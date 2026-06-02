@@ -1,52 +1,55 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>DRE</title>
-<link rel="stylesheet" href="estilo.css">
-</head>
-
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>DRE</title>
+<link rel="stylesheet" href="estilo.css"></head>
 <body>
 
 <div class="sidebar">
-    <a href="index.html">Home</a>
-    <a href="dre.html">DRE</a>
-    <a href="kpi.html">KPIs</a>
+    <div class="logo">📊 <span>DRE</span> Insights</div>
+    <a href="index.html">🏠 Home</a>
+    <a href="dre.html" class="active">📋 DRE</a>
+    <a href="kpi.html">📈 KPIs</a>
+    <div class="section-title">Negócios</div>
+    <a href="dre.html">🏢 Consolidado</a>
+    <a href="dre.html">🏦 Banco</a>
+    <a href="dre.html">🚗 Automóveis</a>
+    <a href="dre.html">📦 Consórcio</a>
+    <a href="dre.html">🚛 Veículos Comerciais</a>
+    <a href="dre.html">🔑 Locação</a>
+    <a href="dre.html">🛡️ Corretora</a>
+    <a href="dre.html">🏗️ Holding</a>
 </div>
 
 <div class="main">
+    <div class="topbar">
+        <h1>DRE Consolidado</h1>
+        <div class="filters">
+            <select id="mesFiltro" onchange="renderDRE()">
+                <option value="5">Maio</option>
+                <option value="4">Abril</option>
+            </select>
+        </div>
+    </div>
 
-<h2>DRE Consolidado</h2>
-
-<select id="mes" onchange="renderDRE()">
-<option value="5">Maio</option>
-<option value="4">Abril</option>
-</select>
-
-<table>
-
-<thead>
-<tr>
-<th>Linha</th>
-<th>Real Mês</th>
-<th>Orçado</th>
-<th>Δ</th>
-<th>%</th>
-<th>Acum Real</th>
-<th>Acum Orç</th>
-<th>Δ Acum</th>
-</tr>
-</thead>
-
-<tbody id="dre"></tbody>
-
-</table>
-
+    <div class="table-container">
+    <table>
+    <thead>
+    <tr>
+        <th rowspan="2">Linha DRE</th>
+        <th colspan="7" style="text-align:center">MÊS</th>
+        <th colspan="4" style="text-align:center">ACUMULADO</th>
+    </tr>
+    <tr>
+        <th>AA</th><th>Real</th><th>Orçado</th><th>Δ</th><th>%</th><th>Δ AA</th><th>% AA</th>
+        <th>Real</th><th>Orçado</th><th>Δ</th><th>%</th>
+    </tr>
+    </thead>
+    <tbody id="dreBody"></tbody>
+    </table>
+    </div>
 </div>
 
 <script src="dados.js"></script>
 <script src="app.js"></script>
-
-</body>
-</html>
-``
+<script>renderDRE();</script>
+</body></html>
