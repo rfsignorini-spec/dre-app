@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DRE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+    <a href="index.html">Home</a>
+    <a href="dre.html">DRE</a>
+    <a href="kpi.html">KPIs</a>
+</div>
+
+<div class="main">
+
+<h2>DRE Consolidado</h2>
+
+<select id="mes" onchange="renderDRE()">
+<option value="5">Maio</option>
+<option value="4">Abril</option>
+</select>
+
+<table>
+
+<thead>
+<tr>
+<th>Linha</th>
+<th>Real Mês</th>
+<th>Orçado</th>
+<th>Δ</th>
+<th>%</th>
+<th>Acum Real</th>
+<th>Acum Orç</th>
+<th>Δ Acum</th>
+</tr>
+</thead>
+
+<tbody id="dre"></tbody>
+
+</table>
+
+</div>
+
+<script src="dados.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
+``
