@@ -1,35 +1,46 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>DRE Insights</title>
-<link rel="stylesheet" href="estilo.css">
-</head>
-
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>DRE Insights</title>
+<link rel="stylesheet" href="estilo.css"></head>
 <body>
 
 <div class="sidebar">
-    <h3>📊 DRE Insights</h3>
-
+    <div class="logo">📊 <span>DRE</span> Insights</div>
     <a href="index.html">🏠 Home</a>
-    <a href="dre.html">📊 DRE</a>
+    <a href="dre.html">📋 DRE</a>
     <a href="kpi.html">📈 KPIs</a>
+    <div class="section-title">Negócios</div>
+    <a href="dre.html">🏢 Consolidado</a>
+    <a href="dre.html">🏦 Banco</a>
+    <a href="dre.html">🚗 Automóveis</a>
+    <a href="dre.html">📦 Consórcio</a>
+    <a href="dre.html">🚛 Veículos Comerciais</a>
+    <a href="dre.html">🔑 Locação</a>
+    <a href="dre.html">🛡️ Corretora</a>
+    <a href="dre.html">🏗️ Holding</a>
 </div>
 
 <div class="main">
+    <div class="topbar">
+        <h1>Painel Executivo</h1>
+        <div class="filters">
+            <select><option>2026</option><option>2025</option></select>
+            <select><option>Maio</option><option>Abril</option></select>
+        </div>
+    </div>
 
-<h2>📊 Menu Executivo</h2>
+    <div class="cards">
+        <div class="card"><div class="card-title">Receita Líquida</div><div class="card-value" id="sumRec">-</div><div class="card-meta"><span class="tag yellow">Orç: 89.8%</span></div></div>
+        <div class="card"><div class="card-title">EBITDA</div><div class="card-value" id="sumEbitda">-</div><div class="card-meta"><span class="tag green">Orç: 105.7%</span></div></div>
+        <div class="card"><div class="card-title">Lucro Líquido</div><div class="card-value" id="sumLucro">-</div><div class="card-meta"><span class="tag yellow">Orç: 97.3%</span></div></div>
+        <div class="card"><div class="card-title">Aderência Orçamento</div><div class="card-value" id="sumAder">-</div><div class="card-meta"><span class="tag yellow">Meta: 100%</span></div></div>
+    </div>
 
-<div class="cards">
-
-<div class="card">Consolidado<br><strong>120M</strong></div>
-<div class="card">Banco<br><strong>45M</strong></div>
-<div class="card">Locação<br><strong>20M</strong></div>
-<div class="card">Consórcio<br><strong>35M</strong></div>
-
+    <h2 style="margin-bottom:16px;font-size:18px">Resultado por Negócio</h2>
+    <div class="cards" id="negociosCards"></div>
 </div>
 
-</div>
-
-</body>
-</html>
+<script src="dados.js"></script>
+<script src="app.js"></script>
+<script>renderHome();</script>
+</body></html>
