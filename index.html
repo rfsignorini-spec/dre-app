@@ -1,198 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>DRE App</title>
-
-<style>
-
-body {
-    font-family: Segoe UI, Arial;
-    background: #f4f6f9;
-    margin: 20px;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-h2 {
-    margin: 0;
-}
-
-.filtros {
-    margin: 15px 0;
-}
-
-select {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-.cards {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.card {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    flex: 1;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.card strong {
-    display: block;
-    font-size: 18px;
-    margin-top: 5px;
-}
-
-.pos { color: #2ecc71; }
-.neg { color: #e74c3c; }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-th {
-    background: #2f8f2f;
-    color: white;
-    padding: 10px;
-    text-align: left;
-}
-
-td {
-    padding: 8px;
-    border-bottom: 1px solid #eee;
-}
-
-tr:hover {
-    background: #f9f9f9;
-}
-
-.n1 {
-    font-weight: bold;
-    background: #eef3f6;
-}
-
-.n2 {
-    padding-left: 20px;
-}
-
-.n3 {
-    padding-left: 40px;
-}
-
-</style>
-
+<title>DRE Insights</title>
+<link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
-<div class="header">
-    <h2>📊 DRE CONSOLIDADO</h2>
-
-    <select id="mes" onchange="renderDRE()">
-        <option value="5">Maio</option>
-        <option value="4">Abril</option>
-    </select>
+<div class="sidebar">
+    <h3>DRE Insights</h3>
+    <a href="index.html">🏠 Home</a>
+    <a href="dre.html">📊 DRE</a>
+    <a href="kpi.html">📈 KPIs</a>
 </div>
 
-<!-- CARDS TOP -->
+<div class="main">
+
+<h2>📊 Menu Executivo</h2>
+
 <div class="cards">
-    <div class="card">
-        Receita Líquida
-        <strong id="rec"></strong>
-    </div>
 
-    <div class="card">
-        EBITDA
-        <strong id="ebitda"></strong>
-    </div>
+<div class="card">Consolidado<br><strong>120M</strong></div>
+<div class="card">Banco<br><strong>45M</strong></div>
+<div class="card">Locação<br><strong>20M</strong></div>
+<div class="card">Consórcio<br><strong>35M</strong></div>
 
-    <div class="card">
-        Lucro Líquido
-        <strong id="ll"></strong>
-    </div>
 </div>
 
-<table>
-<thead>
-<tr>
-<th>Linha</th>
-<th>Real</th>
-<th>Orçado</th>
-<th>Δ</th>
-<th>%</th>
-</tr>
-</thead>
-
-<tbody id="dreTable"></tbody>
-</table>
-
-<script>
-
-const dados = [
-    { linha:"Receita Líquida", nivel:1, mes:5, real:1158, orc:1290 },
-    { linha:"Custo Variável", nivel:1, mes:5, real:-980, orc:-900 },
-    { linha:"Lucro Bruto", nivel:1, mes:5, real:178, orc:390 },
-    { linha:"Despesas Variáveis", nivel:1, mes:5, real:-46, orc:-45 },
-    { linha:"Comissões", nivel:2, mes:5, real:-32, orc:-30 },
-    { linha:"EBITDA", nivel:1, mes:5, real:148, orc:140 },
-    { linha:"Lucro Líquido", nivel:1, mes:5, real:120, orc:113 }
-];
-
-function renderDRE() {
-
-    const mes = document.getElementById("mes").value;
-    const tabela = document.getElementById("dreTable");
-
-    tabela.innerHTML = "";
-
-    let rec, ebitda, ll;
-
-    dados.filter(d => d.mes == mes).forEach(item => {
-
-        const delta = item.real - item.orc;
-        const perc = (item.real / item.orc) * 100;
-
-        const classe = delta >= 0 ? "pos" : "neg";
-
-        tabela.innerHTML += `
-            <tr class="n${item.nivel}">
-                <td>${item.linha}</td>
-                <td>${item.real}</td>
-                <td>${item.orc}</td>
-                <td class="${classe}">${delta}</td>
-                <td>${perc.toFixed(1)}%</td>
-            </tr>
-        `;
-
-        // alimentar cards
-        if(item.linha === "Receita Líquida") rec = item.real;
-        if(item.linha === "EBITDA") ebitda = item.real;
-        if(item.linha === "Lucro Líquido") ll = item.real;
-
-    });
-
-    document.getElementById("rec").innerText = rec;
-    document.getElementById("ebitda").innerText = ebitda;
-    document.getElementById("ll").innerText = ll;
-}
-
-renderDRE();
-
-</script>
+</div>
 
 </body>
 </html>
