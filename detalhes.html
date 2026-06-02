@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Detalhes</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2>🔍 Detalhamento</h2>
+
+<div id="detalhe"></div>
+
+<button onclick="voltar()">⬅ Voltar</button>
+
+<script>
+
+const linha = localStorage.getItem("linhaSelecionada");
+
+document.getElementById("detalhe").innerHTML =
+    "<h3>" + linha + "</h3>" +
+    "<p>Impacto principal: variação de receita e despesas.</p>";
+
+function voltar() {
+    window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>
