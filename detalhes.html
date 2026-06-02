@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Detalhe</title>
-<link rel="stylesheet" href="estilo.css">
-</head>
-
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>Detalhe</title>
+<link rel="stylesheet" href="estilo.css"></head>
 <body>
 
-<div class="main">
-
-<h2>Detalhamento</h2>
-
-<div id="info"></div>
-
-<button onclick="voltar()">Voltar</button>
-
+<div class="sidebar">
+    <div class="logo">📊 <span>DRE</span> Insights</div>
+    <a href="index.html">🏠 Home</a>
+    <a href="dre.html">📋 DRE</a>
+    <a href="kpi.html">📈 KPIs</a>
+    <div class="section-title">Negócios</div>
+    <a href="dre.html">🏢 Consolidado</a>
+    <a href="dre.html">🏦 Banco</a>
+    <a href="dre.html">🚗 Automóveis</a>
+    <a href="dre.html">📦 Consórcio</a>
+    <a href="dre.html">🚛 Veículos Comerciais</a>
+    <a href="dre.html">🔑 Locação</a>
+    <a href="dre.html">🛡️ Corretora</a>
+    <a href="dre.html">🏗️ Holding</a>
 </div>
 
-<script>
-let linha = localStorage.getItem("linha");
+<div class="main">
+    <div class="topbar">
+        <h1 id="detTitulo">Detalhe</h1>
+        <button class="btn btn-secondary" onclick="location.href='dre.html'">⬅ Voltar ao DRE</button>
+    </div>
 
-document.getElementById("info").innerHTML =
-"<h3>"+linha+"</h3><p>Impacto relevante nas despesas.</p>";
+    <div class="detail-grid" id="detGrid"></div>
 
-function voltar(){
-window.location.href = "dre.html";
-}
-</script>
+    <div class="detail-card" style="margin-bottom:16px">
+        <h4>📊 Tendência (últimos 6 meses)</h4>
+        <div class="mini-bar" id="miniBars"></div>
+    </div>
 
-</body>
-</html>
-``
+    <div class="insight-box" id="insightText">Carregando insight...</div>
+</div>
+
+<script src="dados.js"></script>
+<script src="app.js"></script>
+<script>renderDetalhe();</script>
+</body></html>
