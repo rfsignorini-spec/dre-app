@@ -1,85 +1,73 @@
-const DRE = [];
-
-function gerarMes(mes, fator) {
-var linhas = [
-{linha:"Receita Bruta",nivel:1,ordem:1,pai:null,real:1282000*fator,orc:1400000*fator,aa:1200000*fator,sub:false,tot:false,sep:false},
-{linha:"Deduções de Vendas",nivel:2,ordem:2,pai:"Receita Bruta",real:-124000*fator,orc:-110000*fator,aa:-110000*fator,sub:false,tot:false,sep:false},
-{linha:"Receita Líquida",nivel:1,ordem:3,pai:null,real:1158000*fator,orc:1290000*fator,aa:1090000*fator,sub:true,tot:false,sep:false},
-{linha:"Custo Variável",nivel:2,ordem:4,pai:"Receita Líquida",real:-980000*fator,orc:-900000*fator,aa:-900000*fator,sub:false,tot:false,sep:false},
-{linha:"Lucro Bruto",nivel:1,ordem:5,pai:null,real:178000*fator,orc:390000*fator,aa:190000*fator,sub:true,tot:false,sep:true},
-
-{linha:"Despesas Variáveis",nivel:1,ordem:6,pai:null,real:-46000*fator,orc:-45000*fator,aa:-40000*fator,sub:false,tot:false,sep:true},
-{linha:"Despesas com Comissões",nivel:2,ordem:7,pai:"Despesas Variáveis",real:-32000*fator,orc:-30000*fator,aa:-28000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Comissões (-)",nivel:3,ordem:8,pai:"Despesas com Comissões",real:-32000*fator,orc:-30000*fator,aa:-28000*fator,sub:false,tot:false,sep:false},
-{linha:"Despesas com Vendas",nivel:2,ordem:9,pai:"Despesas Variáveis",real:-14000*fator,orc:-15000*fator,aa:-12000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Vendas (-)",nivel:3,ordem:10,pai:"Despesas com Vendas",real:-10000*fator,orc:-11000*fator,aa:-9000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Marketing (-)",nivel:3,ordem:11,pai:"Despesas com Vendas",real:-4000*fator,orc:-4000*fator,aa:-3000*fator,sub:false,tot:false,sep:false},
-{linha:"Margem de Contribuição",nivel:1,ordem:12,pai:null,real:132000*fator,orc:345000*fator,aa:150000*fator,sub:true,tot:false,sep:true},
-
-{linha:"Despesas Totais",nivel:1,ordem:13,pai:null,real:-95000*fator,orc:-98000*fator,aa:-88000*fator,sub:false,tot:false,sep:true},
-{linha:"Despesas Fixas",nivel:2,ordem:14,pai:"Despesas Totais",real:-70000*fator,orc:-73000*fator,aa:-65000*fator,sub:false,tot:false,sep:false},
-{linha:"Despesas com Pessoal",nivel:3,ordem:15,pai:"Despesas Fixas",real:-45000*fator,orc:-48000*fator,aa:-42000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Salários e Encargos (-)",nivel:4,ordem:16,pai:"Despesas com Pessoal",real:-30000*fator,orc:-32000*fator,aa:-28000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Benefícios (-)",nivel:4,ordem:17,pai:"Despesas com Pessoal",real:-12000*fator,orc:-11000*fator,aa:-10000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Treinamento (-)",nivel:4,ordem:18,pai:"Despesas com Pessoal",real:-3000*fator,orc:-5000*fator,aa:-4000*fator,sub:false,tot:false,sep:false},
-{linha:"Despesas Gerais e Administrativas",nivel:3,ordem:19,pai:"Despesas Fixas",real:-25000*fator,orc:-25000*fator,aa:-23000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Serviços de Terceiros (-)",nivel:4,ordem:20,pai:"Despesas Gerais e Administrativas",real:-8000*fator,orc:-7000*fator,aa:-7000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Aluguéis (-)",nivel:4,ordem:21,pai:"Despesas Gerais e Administrativas",real:-4000*fator,orc:-4000*fator,aa:-3500*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Informática e Telecom (-)",nivel:4,ordem:22,pai:"Despesas Gerais e Administrativas",real:-5000*fator,orc:-5500*fator,aa:-4800*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Despesas Gerais (-)",nivel:4,ordem:23,pai:"Despesas Gerais e Administrativas",real:-3000*fator,orc:-3500*fator,aa:-3000*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Assuntos Institucionais e Legais (-)",nivel:4,ordem:24,pai:"Despesas Gerais e Administrativas",real:-2000*fator,orc:-2000*fator,aa:-1800*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Viagens (-)",nivel:4,ordem:25,pai:"Despesas Gerais e Administrativas",real:-1500*fator,orc:-1800*fator,aa:-1500*fator,sub:false,tot:false,sep:false},
-{linha:"Pacote Utilidades (-)",nivel:4,ordem:26,pai:"Despesas Gerais e Administrativas",real:-1500*fator,orc:-1200*fator,aa:-1400*fator,sub:false,tot:false,sep:false},
-{linha:"Recuperação de Despesas",nivel:2,ordem:27,pai:"Despesas Totais",real:5000*fator,orc:4000*fator,aa:3000*fator,sub:false,tot:false,sep:false},
-{linha:"Despesas Compartilhadas",nivel:2,ordem:28,pai:"Despesas Totais",real:-18000*fator,orc:-15000*fator,aa:-14000*fator,sub:false,tot:false,sep:false},
-{linha:"Despesas CSC",nivel:3,ordem:29,pai:"Despesas Compartilhadas",real:-10000*fator,orc:-8000*fator,aa:-7000*fator,sub:false,tot:false,sep:false},
-{linha:"Despesas Corporativo",nivel:3,ordem:30,pai:"Despesas Compartilhadas",real:-8000*fator,orc:-7000*fator,aa:-7000*fator,sub:false,tot:false,sep:false},
-{linha:"Provisões",nivel:2,ordem:31,pai:"Despesas Totais",real:-9000*fator,orc:-7000*fator,aa:-6000*fator,sub:false,tot:false,sep:false},
-{linha:"Provisões Inadimplência",nivel:3,ordem:32,pai:"Provisões",real:-4000*fator,orc:-3000*fator,aa:-2500*fator,sub:false,tot:false,sep:false},
-{linha:"Provisões Jurídicas",nivel:3,ordem:33,pai:"Provisões",real:-2000*fator,orc:-2000*fator,aa:-1500*fator,sub:false,tot:false,sep:false},
-{linha:"BNDU",nivel:3,ordem:34,pai:"Provisões",real:-500*fator,orc:-500*fator,aa:-400*fator,sub:false,tot:false,sep:false},
-{linha:"Provisões Contencioso",nivel:3,ordem:35,pai:"Provisões",real:-1500*fator,orc:-800*fator,aa:-1000*fator,sub:false,tot:false,sep:false},
-{linha:"Provisões Perda de Estoque",nivel:3,ordem:36,pai:"Provisões",real:-500*fator,orc:-400*fator,aa:-300*fator,sub:false,tot:false,sep:false},
-{linha:"Provisões Administrativas",nivel:3,ordem:37,pai:"Provisões",real:-500*fator,orc:-300*fator,aa:-300*fator,sub:false,tot:false,sep:false},
-{linha:"PPR",nivel:2,ordem:38,pai:"Despesas Totais",real:-8000*fator,orc:-9000*fator,aa:-7000*fator,sub:false,tot:false,sep:false},
-{linha:"PPR Unidade",nivel:3,ordem:39,pai:"PPR",real:-4000*fator,orc:-5000*fator,aa:-3500*fator,sub:false,tot:false,sep:false},
-{linha:"PPR CSC",nivel:3,ordem:40,pai:"PPR",real:-2500*fator,orc:-2500*fator,aa:-2000*fator,sub:false,tot:false,sep:false},
-{linha:"PPR Corporativo",nivel:3,ordem:41,pai:"PPR",real:-1500*fator,orc:-1500*fator,aa:-1500*fator,sub:false,tot:false,sep:false},
-{linha:"Outros Resultados",nivel:2,ordem:42,pai:"Despesas Totais",real:5000*fator,orc:2000*fator,aa:3000*fator,sub:false,tot:false,sep:false},
-
-{linha:"EBITDA",nivel:1,ordem:43,pai:null,real:148000*fator,orc:140000*fator,aa:95000*fator,sub:true,tot:false,sep:true},
-
-{linha:"Depreciação e Amortização",nivel:1,ordem:44,pai:null,real:-12000*fator,orc:-15000*fator,aa:-10000*fator,sub:false,tot:false,sep:true},
-{linha:"DPA Negócio",nivel:2,ordem:45,pai:"Depreciação e Amortização",real:-10000*fator,orc:-12000*fator,aa:-8000*fator,sub:false,tot:false,sep:false},
-{linha:"DPA Áreas Compartilhadas",nivel:2,ordem:46,pai:"Depreciação e Amortização",real:-2000*fator,orc:-3000*fator,aa:-2000*fator,sub:false,tot:false,sep:false},
-{linha:"EBIT",nivel:1,ordem:47,pai:null,real:136000*fator,orc:125000*fator,aa:85000*fator,sub:true,tot:false,sep:true},
-
-{linha:"Resultado Financeiro",nivel:1,ordem:48,pai:null,real:10000*fator,orc:8000*fator,aa:5000*fator,sub:false,tot:false,sep:true},
-{linha:"RF Outros Efeitos Contábeis",nivel:2,ordem:49,pai:"Resultado Financeiro",real:-3000*fator,orc:-2000*fator,aa:-2000*fator,sub:false,tot:false,sep:false},
-{linha:"RF Caixa Líquido",nivel:2,ordem:50,pai:"Resultado Financeiro",real:13000*fator,orc:10000*fator,aa:7000*fator,sub:false,tot:false,sep:false},
-{linha:"Imposto de Renda e Contribuição Social",nivel:1,ordem:51,pai:null,real:-26000*fator,orc:-20000*fator,aa:-18000*fator,sub:false,tot:false,sep:false},
-
-{linha:"Lucro Líquido sem Equivalência",nivel:1,ordem:52,pai:null,real:120000*fator,orc:113000*fator,aa:72000*fator,sub:true,tot:false,sep:true},
-{linha:"Equivalência",nivel:1,ordem:53,pai:null,real:-5000*fator,orc:0,aa:0,sub:false,tot:false,sep:true},
-{linha:"Lucro Líquido com Equivalência",nivel:1,ordem:54,pai:null,real:115000*fator,orc:113000*fator,aa:72000*fator,sub:true,tot:false,sep:true},
-{linha:"Outros Resultados Não Recorrentes",nivel:1,ordem:55,pai:null,real:-5000*fator,orc:0,aa:-3000*fator,sub:false,tot:false,sep:true},
-{linha:"Lucro Líquido Total",nivel:1,ordem:56,pai:null,real:110000*fator,orc:113000*fator,aa:69000*fator,sub:false,tot:true,sep:true}
+var DRE=[];
+function gM(mes,f){
+var L=[
+{l:"Receita Bruta",n:1,o:1,p:null,r:1282000,oc:1400000,a:1200000,s:0,t:0,sp:0},
+{l:"Deduções de Vendas",n:2,o:2,p:"Receita Bruta",r:-124000,oc:-110000,a:-110000,s:0,t:0,sp:0},
+{l:"Receita Líquida",n:1,o:3,p:null,r:1158000,oc:1290000,a:1090000,s:1,t:0,sp:0},
+{l:"Custo Variável",n:2,o:4,p:"Receita Líquida",r:-980000,oc:-900000,a:-900000,s:0,t:0,sp:0},
+{l:"Lucro Bruto",n:1,o:5,p:null,r:178000,oc:390000,a:190000,s:1,t:0,sp:1},
+{l:"Despesas Variáveis",n:1,o:6,p:null,r:-46000,oc:-45000,a:-40000,s:0,t:0,sp:1},
+{l:"Despesas com Comissões",n:2,o:7,p:"Despesas Variáveis",r:-32000,oc:-30000,a:-28000,s:0,t:0,sp:0},
+{l:"Pacote Comissões (-)",n:3,o:8,p:"Despesas com Comissões",r:-32000,oc:-30000,a:-28000,s:0,t:0,sp:0},
+{l:"Despesas com Vendas",n:2,o:9,p:"Despesas Variáveis",r:-14000,oc:-15000,a:-12000,s:0,t:0,sp:0},
+{l:"Pacote Vendas (-)",n:3,o:10,p:"Despesas com Vendas",r:-10000,oc:-11000,a:-9000,s:0,t:0,sp:0},
+{l:"Pacote Marketing (-)",n:3,o:11,p:"Despesas com Vendas",r:-4000,oc:-4000,a:-3000,s:0,t:0,sp:0},
+{l:"Margem de Contribuição",n:1,o:12,p:null,r:132000,oc:345000,a:150000,s:1,t:0,sp:1},
+{l:"Despesas Totais",n:1,o:13,p:null,r:-95000,oc:-98000,a:-88000,s:0,t:0,sp:1},
+{l:"Despesas Fixas",n:2,o:14,p:"Despesas Totais",r:-70000,oc:-73000,a:-65000,s:0,t:0,sp:0},
+{l:"Despesas com Pessoal",n:3,o:15,p:"Despesas Fixas",r:-45000,oc:-48000,a:-42000,s:0,t:0,sp:0},
+{l:"Pacote Salários e Encargos (-)",n:4,o:16,p:"Despesas com Pessoal",r:-30000,oc:-32000,a:-28000,s:0,t:0,sp:0},
+{l:"Pacote Benefícios (-)",n:4,o:17,p:"Despesas com Pessoal",r:-12000,oc:-11000,a:-10000,s:0,t:0,sp:0},
+{l:"Pacote Treinamento (-)",n:4,o:18,p:"Despesas com Pessoal",r:-3000,oc:-5000,a:-4000,s:0,t:0,sp:0},
+{l:"Despesas Gerais e Administrativas",n:3,o:19,p:"Despesas Fixas",r:-25000,oc:-25000,a:-23000,s:0,t:0,sp:0},
+{l:"Pacote Serviços de Terceiros (-)",n:4,o:20,p:"Despesas Gerais e Administrativas",r:-8000,oc:-7000,a:-7000,s:0,t:0,sp:0},
+{l:"Pacote Aluguéis (-)",n:4,o:21,p:"Despesas Gerais e Administrativas",r:-4000,oc:-4000,a:-3500,s:0,t:0,sp:0},
+{l:"Pacote Informática e Telecom (-)",n:4,o:22,p:"Despesas Gerais e Administrativas",r:-5000,oc:-5500,a:-4800,s:0,t:0,sp:0},
+{l:"Pacote Despesas Gerais (-)",n:4,o:23,p:"Despesas Gerais e Administrativas",r:-3000,oc:-3500,a:-3000,s:0,t:0,sp:0},
+{l:"Pacote Assuntos Institucionais e Legais (-)",n:4,o:24,p:"Despesas Gerais e Administrativas",r:-2000,oc:-2000,a:-1800,s:0,t:0,sp:0},
+{l:"Pacote Viagens (-)",n:4,o:25,p:"Despesas Gerais e Administrativas",r:-1500,oc:-1800,a:-1500,s:0,t:0,sp:0},
+{l:"Pacote Utilidades (-)",n:4,o:26,p:"Despesas Gerais e Administrativas",r:-1500,oc:-1200,a:-1400,s:0,t:0,sp:0},
+{l:"Recuperação de Despesas",n:2,o:27,p:"Despesas Totais",r:5000,oc:4000,a:3000,s:0,t:0,sp:0},
+{l:"Despesas Compartilhadas",n:2,o:28,p:"Despesas Totais",r:-18000,oc:-15000,a:-14000,s:0,t:0,sp:0},
+{l:"Despesas CSC",n:3,o:29,p:"Despesas Compartilhadas",r:-10000,oc:-8000,a:-7000,s:0,t:0,sp:0},
+{l:"Despesas Corporativo",n:3,o:30,p:"Despesas Compartilhadas",r:-8000,oc:-7000,a:-7000,s:0,t:0,sp:0},
+{l:"Provisões",n:2,o:31,p:"Despesas Totais",r:-9000,oc:-7000,a:-6000,s:0,t:0,sp:0},
+{l:"Provisões Inadimplência",n:3,o:32,p:"Provisões",r:-4000,oc:-3000,a:-2500,s:0,t:0,sp:0},
+{l:"Provisões Jurídicas",n:3,o:33,p:"Provisões",r:-2000,oc:-2000,a:-1500,s:0,t:0,sp:0},
+{l:"BNDU",n:3,o:34,p:"Provisões",r:-500,oc:-500,a:-400,s:0,t:0,sp:0},
+{l:"Provisões Contencioso",n:3,o:35,p:"Provisões",r:-1500,oc:-800,a:-1000,s:0,t:0,sp:0},
+{l:"Provisões Perda de Estoque",n:3,o:36,p:"Provisões",r:-500,oc:-400,a:-300,s:0,t:0,sp:0},
+{l:"Provisões Administrativas",n:3,o:37,p:"Provisões",r:-500,oc:-300,a:-300,s:0,t:0,sp:0},
+{l:"PPR",n:2,o:38,p:"Despesas Totais",r:-8000,oc:-9000,a:-7000,s:0,t:0,sp:0},
+{l:"PPR Unidade",n:3,o:39,p:"PPR",r:-4000,oc:-5000,a:-3500,s:0,t:0,sp:0},
+{l:"PPR CSC",n:3,o:40,p:"PPR",r:-2500,oc:-2500,a:-2000,s:0,t:0,sp:0},
+{l:"PPR Corporativo",n:3,o:41,p:"PPR",r:-1500,oc:-1500,a:-1500,s:0,t:0,sp:0},
+{l:"Outros Resultados",n:2,o:42,p:"Despesas Totais",r:5000,oc:2000,a:3000,s:0,t:0,sp:0},
+{l:"EBITDA",n:1,o:43,p:null,r:148000,oc:140000,a:95000,s:1,t:0,sp:1},
+{l:"Depreciação e Amortização",n:1,o:44,p:null,r:-12000,oc:-15000,a:-10000,s:0,t:0,sp:1},
+{l:"DPA Negócio",n:2,o:45,p:"Depreciação e Amortização",r:-10000,oc:-12000,a:-8000,s:0,t:0,sp:0},
+{l:"DPA Áreas Compartilhadas",n:2,o:46,p:"Depreciação e Amortização",r:-2000,oc:-3000,a:-2000,s:0,t:0,sp:0},
+{l:"EBIT",n:1,o:47,p:null,r:136000,oc:125000,a:85000,s:1,t:0,sp:1},
+{l:"Resultado Financeiro",n:1,o:48,p:null,r:10000,oc:8000,a:5000,s:0,t:0,sp:1},
+{l:"RF Outros Efeitos Contábeis",n:2,o:49,p:"Resultado Financeiro",r:-3000,oc:-2000,a:-2000,s:0,t:0,sp:0},
+{l:"RF Caixa Líquido",n:2,o:50,p:"Resultado Financeiro",r:13000,oc:10000,a:7000,s:0,t:0,sp:0},
+{l:"Imposto de Renda e Contribuição Social",n:1,o:51,p:null,r:-26000,oc:-20000,a:-18000,s:0,t:0,sp:0},
+{l:"Lucro Líquido sem Equivalência",n:1,o:52,p:null,r:120000,oc:113000,a:72000,s:1,t:0,sp:1},
+{l:"Equivalência",n:1,o:53,p:null,r:-5000,oc:0,a:0,s:0,t:0,sp:1},
+{l:"Lucro Líquido com Equivalência",n:1,o:54,p:null,r:115000,oc:113000,a:72000,s:1,t:0,sp:1},
+{l:"Outros Resultados Não Recorrentes",n:1,o:55,p:null,r:-5000,oc:0,a:-3000,s:0,t:0,sp:1},
+{l:"Lucro Líquido Total",n:1,o:56,p:null,r:110000,oc:113000,a:69000,s:0,t:1,sp:1}
 ];
-
-linhas.forEach(function(l){
-    DRE.push({
-        linha:l.linha, nivel:l.nivel, ordem:l.ordem, pai:l.pai, mes:mes,
-        real:Math.round(l.real), orc:Math.round(l.orc), aa:Math.round(l.aa),
-        acumR:Math.round(l.real*mes), acumO:Math.round(l.orc*mes), acumAA:Math.round(l.aa*mes),
-        sub:l.sub, tot:l.tot, sep:l.sep
-    });
+L.forEach(function(x){
+DRE.push({linha:x.l,nivel:x.n,ordem:x.o,pai:x.p,mes:mes,
+real:Math.round(x.r*f),orc:Math.round(x.oc*f),aa:Math.round(x.a*f),
+acumR:Math.round(x.r*f*mes),acumO:Math.round(x.oc*f*mes),acumAA:Math.round(x.a*f*mes),
+sub:!!x.s,tot:!!x.t,sep:!!x.sp});
 });
 }
+gM(4,0.97);gM(5,1.0);
 
-gerarMes(4, 0.97);
-gerarMes(5, 1.0);
-
-var NEGOCIOS = [
+var NEGOCIOS=[
 {nome:"Consolidado",receita:1158000,ebitda:148000,lucro:110000,percOrc:89.8,percAA:106.3},
 {nome:"Banco",receita:320000,ebitda:85000,lucro:62000,percOrc:95.2,percAA:112.1},
 {nome:"Locação",receita:180000,ebitda:42000,lucro:28000,percOrc:91.5,percAA:108.7},
