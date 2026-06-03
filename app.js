@@ -51,12 +51,12 @@ var dt=d5.real-d5.orc,dAA=d5.real-d5.aa;
 var g=document.getElementById('detGrid');
 if(g)g.innerHTML=
 '<div class="detail-card"><h4>\uD83D\uDCCA Real vs Or\u00e7ado</h4>'+
-'<p style="font-size:32px;font-weight:700">'+fmt(d5.real)+'</p>'+
-'<p style="color:#64748b;margin:6px 0">Or\u00e7ado: '+fmt(d5.orc)+'</p>'+
+'<p style="font-size:32px;font-weight:700;color:#431407">'+fmt(d5.real)+'</p>'+
+'<p style="color:#9a6840;margin:6px 0">Or\u00e7ado: '+fmt(d5.orc)+'</p>'+
 '<p class="'+vc(dt)+'" style="font-size:16px">\u0394 '+fmt(dt)+' ('+pct(d5.real,d5.orc)+')</p></div>'+
 '<div class="detail-card"><h4>\uD83D\uDCC8 Real vs Ano Anterior</h4>'+
-'<p style="font-size:32px;font-weight:700">'+fmt(d5.real)+'</p>'+
-'<p style="color:#64748b;margin:6px 0">AA: '+fmt(d5.aa)+'</p>'+
+'<p style="font-size:32px;font-weight:700;color:#431407">'+fmt(d5.real)+'</p>'+
+'<p style="color:#9a6840;margin:6px 0">AA: '+fmt(d5.aa)+'</p>'+
 '<p class="'+vc(dAA)+'" style="font-size:16px">\u0394 '+fmt(dAA)+' ('+pct(d5.real,d5.aa)+')</p></div>';
 var b=document.getElementById('miniBars');
 if(b){b.innerHTML='';
@@ -65,7 +65,7 @@ var mx=Math.max.apply(null,v.map(function(x){return Math.abs(x);}));
 var ms=['Dez','Jan','Fev','Mar','Abr','Mai'];
 v.forEach(function(x,i){
 var h=Math.max(8,(Math.abs(x)/mx)*100);
-var c=x>=0?'linear-gradient(180deg,#3b82f6,#60a5fa)':'linear-gradient(180deg,#ef4444,#f87171)';
+var c=x>=0?'linear-gradient(180deg,#f97316,#fb923c)':'linear-gradient(180deg,#ef4444,#f87171)';
 b.innerHTML+='<div style="height:'+h+'%;background:'+c+'" title="'+ms[i]+': '+fmt(x)+'"></div>';
 });}
 var ib=document.getElementById('insightText');
